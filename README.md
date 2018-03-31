@@ -139,6 +139,19 @@ def minMaxAudio(inputFile):
 
 ---
 
+The basic slice syntax is i:j:k where i is the starting index, j is the stopping index, and k is the step (k\neq0). This selects the m elements (in the corresponding dimension) with index values i, i + k, ..., i + (m - 1) k where m = q + (r\neq0) and q and r are the quotient and remainder obtained by dividing j - i by k: j - i = q k + r, so that i + (m - 1) k < j.
+
+    Example
+
+    >>> x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    >>> x[1:7:2]
+    array([1, 3, 5])
+
+[https://docs.scipy.org/doc/numpy-1.14.0/reference/arrays.indexing.html](https://docs.scipy.org/doc/numpy-1.14.0/reference/arrays.indexing.html)
+
+
+
+---
 
 [http://essentia.upf.edu/documentation/index.html](http://essentia.upf.edu/documentation/index.html)
 
