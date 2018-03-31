@@ -122,8 +122,8 @@ def minMaxAudio(inputFile):
         # Input: inputFile: file path to the wav file Output: 
         print("Input File: ", inputFile)
         (fs, x) = UF.wavread(inputFile)
-        min_val = np.min(abs(x))
-        max_val = np.max(abs(x))	
+        min_val = np.min(x)
+        max_val = np.max(x)	
         # Output: A tuple of the minimum and the maximum value of the audio samples, like: (min_val, max_val)
         print( "min_val max val:", min_val, max_val)
 
@@ -134,12 +134,11 @@ def minMaxAudio(inputFile):
 
     $ python3 A1Part2.py 
     Input File:  ../../sounds/oboe-A4.wav
-    min_val: 0.0
-    max val: 0.834864
-    None
+    min_val: -0.834864
+    max val: 0.56502
 
 ---
 
 
 [http://essentia.upf.edu/documentation/index.html](http://essentia.upf.edu/documentation/index.html)
-# DSP
+
