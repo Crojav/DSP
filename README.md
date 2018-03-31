@@ -23,8 +23,9 @@ For example, the coordinates of a point in 3D space [1, 2, 1] is an array of ran
 
 ---
 
-![https://www.youtube.com/watch?v=L06xKB6l7Ao](https://www.youtube.com/watch?v=L06xKB6l7Ao)
+[How Is Digital Audio Is Created From Sound Waves?](https://www.youtube.com/watch?v=L06xKB6l7Ao)
 
+---
 
 ### A1-Part-1: Reading a wav audio file
 
