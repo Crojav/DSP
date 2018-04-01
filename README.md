@@ -44,14 +44,14 @@ Audio can represented by digital samples. Essentially, a sampler (also called an
 
 ### Questions:
 
-Hoe ziet dan een wav file er uit digitaal - 
-Hoe is dat opgeslagen in digitaal
-Zijn dat floating point digitaal in bits beschreven numbers
-Zijn dat twee dimensionaal 
-    >>> d = np.array( [ [1,0,0], [0,1,2] ], dtype=float )
-    >>> d.shape
-    (2, 3)
-Why the first dimension a lenght of 2 and second dimension a lenght of 3 
+* Hoe ziet dan een wav file er uit digitaal - 
+* Hoe is dat opgeslagen in digitaal
+* Zijn dat floating point digitaal in bits beschreven numbers
+* Zijn dat twee dimensionaal 
+*     >>> d = np.array( [ [1,0,0], [0,1,2] ], dtype=float )
+*     >>> d.shape
+*     (2, 3)
+* Why the first dimension a lenght of 2 and second dimension a lenght of 3 
 
 
 ---
