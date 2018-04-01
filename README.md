@@ -1,8 +1,10 @@
 # DSP
 
+DSP stand for Digital Signal Processing in Python 
+
 ### Digital representation of sound
 
-digital converter (ADC) receives the discrete voltages from the sample and hold device, and ascribes a numerical value to each amplitude. This process of converting voltages to numbers is known as quantization. Those numbers are expressed in the computer as a string of binary digits (1 or 0). To play the sound back, we read the numbers from memory, and deliver those numbers to a digital-to-analog converter (DAC) at the same rate at which they were recorded. The DAC converts each number to a voltage, and communicates those voltages to an amplifier to increase the amplitude of the voltage.
+Analog digital converter (ADC) receives the discrete voltages from the sample and hold device, and ascribes a numerical value to each amplitude. This process of converting voltages to numbers is known as quantization. Those numbers are expressed in the computer as a string of binary digits (1 or 0). To play the sound back, we read the numbers from memory, and deliver those numbers to a digital-to-analog converter (DAC) at the same rate at which they were recorded. The DAC converts each number to a voltage, and communicates those voltages to an amplifier to increase the amplitude of the voltage.
 
  In order for a computer to represent sound accurately, many samples must be taken per second— many more than are necessary for filming a visual image. In fact, we need to take more than twice as many samples as the highest frequency we wish to record. (For an explanation of why this is so, see Limitations of Digital Audio on the next page.) If we want to record frequencies as high as 20,000 Hz, we need to sample the sound at least 40,000 times per second. The standard for compact disc recordings (and for ‘CD-quality’ computer audio) is to take 44,100 samples per second for each channel of audio. The number of samples taken per second is known as the sampling rate.
 
@@ -10,6 +12,59 @@ This means the computer can only accurately represent frequencies up to half the
 
 [https://docs.cycling74.com/max5/tutorials/msp-tut/mspdigitalaudio.html](https://docs.cycling74.com/max5/tutorials/msp-tut/mspdigitalaudio.html)
 
+---
+
+### analog-vs-digital
+
+[https://learn.sparkfun.com/tutorials/analog-vs-digital](https://learn.sparkfun.com/tutorials/analog-vs-digital)
+
+
+---
+
+### binary
+
+[https://learn.sparkfun.com/tutorials/binary](https://learn.sparkfun.com/tutorials/binary)
+
+---
+
+### How is audio represented with numbers?
+
+
+
+I like thinking about how everything can be and is represented by numbers. For example, plaintext is represented by a code like ASCII, and images are represented by RGB values. These are the simplest ways to represent text and images.
+
+What is the simplest way that audio can be represented with numbers? I want to learn how to write programs that work with audio and thought this would be a good way to start. I can't seem to find any good explanations on the internet, though.
+
+Audio can represented by digital samples. Essentially, a sampler (also called an Analog to digital converter) grabs a value of an audio signal every 1/fs, where fs is the sampling frequency. The ADC, then quantizes the signal, which is a rounding operation. So if your signal ranges from 0 to 3 Volts (Full Scale Range) then a sample will be rounded to, for example a 16-bit number. In this example, a 16-bit number is recorded once every 1/fs/
+
+[https://stackoverflow.com/questions/732699/how-is-audio-represented-with-numbers](https://stackoverflow.com/questions/732699/how-is-audio-represented-with-numbers)
+
+
+---
+
+### Questions:
+
+Hoe ziet dan een wav file er uit digitaal - 
+Hoe is dat opgeslagen in digitaal
+Zijn dat floating point digitaal in bits beschreven numbers
+Zijn dat twee dimensionaal 
+    >>> d = np.array( [ [1,0,0], [0,1,2] ], dtype=float )
+    >>> d.shape
+    (2, 3)
+Why the first dimension a lenght of 2 and second dimension a lenght of 3 
+
+
+---
+
+[https://processing.org/tutorials/arrays/](https://processing.org/tutorials/arrays/)
+
+---
+
+### arrays
+
+[https://processing.org/tutorials/arrays/](https://processing.org/tutorials/arrays/)
+
+---
 
 ### Numpy
 
@@ -17,10 +72,56 @@ NumPy’s main object is the homogeneous multidimensional array. It is a table o
 
 For example, the coordinates of a point in 3D space [1, 2, 1] is an array of rank 1, because it has one axis. That axis has a length of 3. In the example pictured below, the array has rank 2 (it is 2-dimensional). The first dimension (axis) has a length of 2, the second dimension has a length of 3.
 
+    [[ 1., 0., 0.], # first dimension (axis) has a length of 2
+     [ 0., 1., 2.]] # second dimension (axis) has a length of 3
+
+    >>> d = np.array( [ [1,0,0], [0,1,2] ], dtype=float )
+    >>> d.shape
+    (2, 3)
+
+---
+
+
+
+
+
+#### Array Creation
+
+
+
+    >>> import numpy as np
+    >>> a = np.arange(15)
+    # array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14])
+
+
+
+##### arange
+
+To create sequences of numbers, NumPy provides a function analogous to range that returns arrays instead of lists.
+
+    >>> np.arange( 10, 30, 5 ) # where 10 is starting number, 30 is the end number and 5 are the steps
+    array([10, 15, 20, 25]) so you get 10(+5)15(+5)20(+5)25 
+    >>> np.arange( 0, 2, 0.3 )                 # it accepts float arguments
+    array([ 0. ,  0.3,  0.6,  0.9,  1.2,  1.5,  1.8])
+
+##### reshape
+
+    # reshape in (n) 3 rows and (m) 5 columns
+    >>> a.reshape(3,5)
+    # array([[ 0,  1,  2,  3,  4],
+    #        [ 5,  6,  7,  8,  9],
+    #        [10, 11, 12, 13, 14]])
+
 
 
 [https://docs.scipy.org/doc/numpy-1.12.0/user/quickstart.html](https://docs.scipy.org/doc/numpy-1.12.0/user/quickstart.html)
 
+#### Array objects
+
+
+
+
+[https://docs.scipy.org/doc/numpy-1.14.0/reference/arrays.html](https://docs.scipy.org/doc/numpy-1.14.0/reference/arrays.html)
 ---
 
 [How Is Digital Audio Is Created From Sound Waves?](https://www.youtube.com/watch?v=L06xKB6l7Ao)
@@ -190,3 +291,11 @@ def hopSamples(x,M):
 
 [http://essentia.upf.edu/documentation/index.html](http://essentia.upf.edu/documentation/index.html)
 
+[https://github.com/cirosantilli/cpp-cheat](https://github.com/cirosantilli/cpp-cheat)
+
+[http://www.cirosantilli.com/](http://www.cirosantilli.com/)
+
+[https://stackoverflow.com/questions/732699/how-is-audio-represented-with-numbers](https://stackoverflow.com/questions/732699/how-is-audio-represented-with-numbers)
+
+
+[https://processing.org/tutorials/arrays/](https://processing.org/tutorials/arrays/)
