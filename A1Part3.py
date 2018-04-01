@@ -29,18 +29,15 @@ def hopSamples(x,M):
 
 
 import numpy as np
-from scipy.io.wavfile import read
 import sys
-import utilFunctions as UF
 
 
 def hopSamples(x,M):
-    inputFile='../../sounds/oboe-A4.wav'
-    print("Input File: ", inputFile)
-    (fs, x) = UF.wavread(inputFile)
-    y = x[0:10]
-#    np_a = np(y)
-    print( "np_a:", y)
+    a = np.arange(0,x,M)
+
+#     array([0, 2, 4, 6, 8])
+ 
+
 
 print(hopSamples(10,2))
 
