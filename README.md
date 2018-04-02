@@ -363,6 +363,63 @@ nal when downsampling it? You can find some related information in https:
 
 ---
 
+    $ soxi vibraphone-C6.wav
+
+    Input File     : 'vibraphone-C6.wav'
+    Channels       : 1
+    Sample Rate    : 44100
+    Precision      : 16-bit
+    Duration       : 00:00:03.25 = 143336 samples = 243.769 CDDA sectors
+    File Size      : 287k
+    Bit Rate       : 706k
+    Sample Encoding: 16-bit Signed Integer PCM
+
+
+---
+
+#### convertfiles.py
+
+    import sys, os
+    sys.path.append("/Users/charlesfoster/music220a/sms-tools/software/transformations/")
+    sys.path.append("/Users/charlesfoster/music220a/sms-tools/software/models/")
+    from stftTransformations import stftMorph
+    from scipy.signal import get_window
+    import utilFunctions as UF
+
+    window = 'blackmanharris'
+
+    def main():
+	    # Call like "python convertfiles.py /Users/charlesfoster/music220a/final/tuba/attack.wav /Users/charlesfoster/music220a/final/attacks/ 0.5"
+	    wav1 = sys.argv[1]
+	    basepath = sys.argv[2]
+	    directorycontents = os.listdir(basepath)
+	    basefiles = [file for file in directorycontents if file.endswith('.wav')]
+
+	    for wav2 in basefiles:
+		    print('...' + basepath + wav2)
+		    fs, x1 = UF.wavread(wav1)
+		    fs, x2 = UF.wavread(basepath + wav2)
+		
+		    w1 = get_window(window, 1024)
+		    w2 = get_window(window, 1024)
+
+		    N1 = 1024
+		    N2 = 1024
+		    H1 = 256
+
+		    smoothf = 0.5
+		    balancef = float(sys.argv[3])
+		    y = stftMorph(x1, x2, fs, w1, N1, w2, N2, H1, smoothf, balancef)
+
+		    outputFile = basepath + 'output_sounds/' + os.path.basename(wav2)
+		    UF.wavwrite(y, fs, outputFile)
+
+    if __name__ == "__main__":
+	    main()
+
+[https://ccrma.stanford.edu/~cfoster0/220a/fp/convertfiles.py](https://ccrma.stanford.edu/~cfoster0/220a/fp/convertfiles.py)
+
+---
     # A1-Part-4.py
 
 
