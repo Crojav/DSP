@@ -128,10 +128,8 @@ To create sequences of numbers, NumPy provides a function analogous to range tha
 [How Is Digital Audio Is Created From Sound Waves?](https://www.youtube.com/watch?v=L06xKB6l7Ao)
 
 ---
+=================================================================================
 ---
-
-## A1-Part-1:
-
 
 ### A1-Part-1: Reading a wav audio file
 
@@ -190,10 +188,9 @@ the following numpy array with 10 samples: array([-0.06213569, -0.04541154, -
     SampleRate : 44100
 
 ---
-
+=================================================================================
 ---
 
-## A1-Part-2
 
 ### A1-Part-2: Basic operations with audio
 
@@ -250,9 +247,9 @@ def minMaxAudio(inputFile):
     max val: 0.56502
 
 ---
+=================================================================================
 ---
 
-## A1-Part-3
 
 ### A1-Part-3: Python array indexing (4 points)
 
