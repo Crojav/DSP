@@ -308,14 +308,21 @@ The basic slice syntax is i:j:k where i is the starting index, j is the stopping
 
     def hopSamples(x,M):
         a = np.arange(0,x,M)
-
-    #     array([0, 2, 4, 6, 8])
-     
+        print(a)
+        # array([0, 2, 4, 6, 8])
 
 
     print(hopSamples(10,2))
 
+---
 
+    $ python3 A1Part3.py 
+    [0 2 4 6 8]
+
+
+---
+
+========================================================
 
 ---
 

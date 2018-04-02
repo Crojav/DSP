@@ -34,7 +34,7 @@ import sys
 
 def hopSamples(x,M):
     a = np.arange(0,x,M)
-
+    print(a)
 #     array([0, 2, 4, 6, 8])
  
 
