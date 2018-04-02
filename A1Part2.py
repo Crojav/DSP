@@ -1,13 +1,10 @@
 # A1Part2.py
-
-""" LET OP PYTHON 3 """
+"""! PYTHON 3 !"""
 
 
 import numpy as np
 from scipy.io.wavfile import read
 import sys
-sys.path.append('software/models')
-
 import utilFunctions as UF
 
 

@@ -1,4 +1,5 @@
 #A1Part1.py
+"""! PYTHON 3 !"""
 
 import numpy as np
 from scipy.io.wavfile import read

@@ -18,7 +18,6 @@ This means the computer can only accurately represent frequencies up to half the
 
 [https://learn.sparkfun.com/tutorials/analog-vs-digital](https://learn.sparkfun.com/tutorials/analog-vs-digital)
 
-
 ---
 
 ### Binary
@@ -29,8 +28,6 @@ This means the computer can only accurately represent frequencies up to half the
 
 ### How is audio represented with numbers?
 
-
-
 I like thinking about how everything can be and is represented by numbers. For example, plaintext is represented by a code like ASCII, and images are represented by RGB values. These are the simplest ways to represent text and images.
 
 What is the simplest way that audio can be represented with numbers? I want to learn how to write programs that work with audio and thought this would be a good way to start. I can't seem to find any good explanations on the internet, though.
@@ -38,20 +35,6 @@ What is the simplest way that audio can be represented with numbers? I want to l
 Audio can represented by digital samples. Essentially, a sampler (also called an Analog to digital converter) grabs a value of an audio signal every 1/fs, where fs is the sampling frequency. The ADC, then quantizes the signal, which is a rounding operation. So if your signal ranges from 0 to 3 Volts (Full Scale Range) then a sample will be rounded to, for example a 16-bit number. In this example, a 16-bit number is recorded once every 1/fs/
 
 [https://stackoverflow.com/questions/732699/how-is-audio-represented-with-numbers](https://stackoverflow.com/questions/732699/how-is-audio-represented-with-numbers)
-
-
----
-
-### Questions:
-
-* Hoe ziet dan een wav file er uit digitaal - 
-* Hoe is dat opgeslagen in digitaal
-* Zijn dat floating point digitaal in bits beschreven numbers
-* Zijn dat twee dimensionaal 
-     >>> d = np.array( [ [1,0,0], [0,1,2] ], dtype=float )
-     >>> d.shape
-     (2, 3)
-* Why the first dimension a lenght of 2 and second dimension a lenght of 3 
 
 
 ---
@@ -77,19 +60,11 @@ For example, the coordinates of a point in 3D space [1, 2, 1] is an array of ran
 
 ---
 
-
-
-
-
 #### Array Creation
-
-
 
     >>> import numpy as np
     >>> a = np.arange(15)
     # array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14])
-
-
 
 ##### arange
 
@@ -109,13 +84,9 @@ To create sequences of numbers, NumPy provides a function analogous to range tha
     #        [10, 11, 12, 13, 14]])
 
 
-
 [https://docs.scipy.org/doc/numpy-1.12.0/user/quickstart.html](https://docs.scipy.org/doc/numpy-1.12.0/user/quickstart.html)
 
 #### Array objects
-
-
-
 
 [https://docs.scipy.org/doc/numpy-1.14.0/reference/arrays.html](https://docs.scipy.org/doc/numpy-1.14.0/reference/arrays.html)
 
@@ -124,6 +95,15 @@ To create sequences of numbers, NumPy provides a function analogous to range tha
 #### How Is Digital Audio Is Created From Sound Waves
 
 [How Is Digital Audio Is Created From Sound Waves?](https://www.youtube.com/watch?v=L06xKB6l7Ao)
+
+---
+
+### Questions:
+
+     >>> d = np.array( [ [1,0,0], [0,1,2] ], dtype=float )
+     >>> d.shape
+     (2, 3)
+     # Why the first dimension a lenght of 2 and second dimension a lenght of 3 
 
 ---
 
@@ -323,6 +303,81 @@ The basic slice syntax is i:j:k where i is the starting index, j is the stopping
 <br>
 
 ---
+
+### A1-Part-4: Downsampling audio - Changing the
+
+sampling rate (Optional )
+One of the required processes to represent a signal inside a computer is sam-
+pling. The sampling rate is the number of samples obtained in one second when
+sampling a continuous analog signal to a discrete digital signal. As mentioned
+earlier, most of the time we will be working with wav audio files that have a
+sampling rate of 44100 Hz, which is a typical value. For some applications,
+changing the sampling rate of an audio signal can be necessary. This optional
+part shows how to do this, from a higher sampling rate to a lower one.
+
+Complete the function downsampleAudio(inputFile,M) in the file A1Part4.py
+so that given an audio file, it applies downsampling by a factor of M and create
+a wav audio file <input_name>_downsampled.wav at a lower sampling rate.
+In Part1 you learned how to read a wav file and the function from Part3
+can be used to perform the downsampling of a signal contained in an array. To
+create a wav audio file from an array, you can use the wavwrite function from
+the utilFunctions module. Be careful with the sampling rate parameter since it
+should be different from that of the original audio.
+
+You can test your code using the file ‘vibraphone-C6.wav’ and a down-
+sampling factor of M=16. Listen to the ‘vibraphone-C6_downsampled.wav’
+sound. What happened to the signal? How could we avoid damaging the sig-
+nal when downsampling it? You can find some related information in https:
+//en.wikipedia.org/wiki/Decimation_%28signal_processing%29.
+
+    def downsampleAudio(inputFile, M):
+    3"""
+    Inputs:
+    inputFile: file name of the wav file (including path)
+    M: downsampling factor (positive integer)
+    """
+    ## Your code here
+
+---
+
+#### How down-sampling a array
+
+    import numpy as np
+    a = np.arange(1,11,1)
+    print(a)
+    print(a[::3])
+
+    # The last line is equivalent to:
+    print(a[0:a.size:3])
+
+    # with the slicing notation as start:stop:step
+
+    # Result:
+
+    [ 1 2 3 4 5 6 7 8 9 10]
+
+    [ 1 4 7 10]
+
+
+[https://stackoverflow.com/questions/34231244/downsampling-a-2d-numpy-array-in-python](https://stackoverflow.com/questions/34231244/downsampling-a-2d-numpy-array-in-python)
+
+---
+
+    # A1-Part-4.py
+
+
+
+
+
+
+---
+
+<br>
+
+---
+
+
+
 
 ### Links
 
