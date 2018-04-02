@@ -298,7 +298,22 @@ The basic slice syntax is i:j:k where i is the starting index, j is the stopping
 
 ---
 
-    A1Part3.py
+    # A1Part3.py
+    """! PYTHON 3 !"""
+
+
+    import numpy as np
+    import sys
+
+
+    def hopSamples(x,M):
+        a = np.arange(0,x,M)
+
+    #     array([0, 2, 4, 6, 8])
+     
+
+
+    print(hopSamples(10,2))
 
 
 
