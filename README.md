@@ -129,7 +129,7 @@ To create sequences of numbers, NumPy provides a function analogous to range tha
 
 ---
 
-========================================================
+<br>
 
 ---
 
@@ -191,7 +191,7 @@ the following numpy array with 10 samples: array([-0.06213569, -0.04541154, -
 
 ---
 
-========================================================
+<br>
 
 ---
 
@@ -252,7 +252,7 @@ def minMaxAudio(inputFile):
 
 ---
 
-========================================================
+<br>
 
 ---
 
@@ -322,7 +322,7 @@ The basic slice syntax is i:j:k where i is the starting index, j is the stopping
 
 ---
 
-========================================================
+<br>
 
 ---
 
