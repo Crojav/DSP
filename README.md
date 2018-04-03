@@ -111,6 +111,10 @@ To create sequences of numbers, NumPy provides a function analogous to range tha
 
 ---
 
+## A1: Python and sounds
+
+---
+
 ### A1-Part-1: Reading a wav audio file
 
 Complete the function readAudio(inputFile) in the file A1Part1.py so that it
@@ -142,7 +146,7 @@ the following numpy array with 10 samples: array([-0.06213569, -0.04541154, -
     ## Your code here
 
 ---
-    #A1Part1.py
+    #A1-Part-1.py
 
     import numpy as np
     from scipy.io.wavfile import read
@@ -161,7 +165,7 @@ the following numpy array with 10 samples: array([-0.06213569, -0.04541154, -
 
 ---
 
-    $ python3 A1Part1.py 
+    $ python3 A1-Part-1.py 
     Input File:  ../../sounds/piano.wav
     [-0.06213569 -0.04541154 -0.02734458 -0.0093997   0.00769066  0.02319407
       0.03503525  0.04309214  0.04626606  0.0441908 ] dtype= float32
@@ -197,7 +201,7 @@ def minMaxAudio(inputFile):
 
 ---
 
-    # A1Part2.py
+    # A1-Part-2.py
     """! PYTHON 3 !"""
 
 
@@ -223,7 +227,7 @@ def minMaxAudio(inputFile):
 
 ---
 
-    $ python3 A1Part2.py 
+    $ python3 A1-Part-2.py 
     Input File:  ../../sounds/oboe-A4.wav
     min_val: -0.834864
     max val: 0.56502
@@ -276,7 +280,7 @@ The basic slice syntax is i:j:k where i is the starting index, j is the stopping
 
 ---
 
-    # A1Part3.py
+    # A1-Part-3.py
     """! PYTHON 3 !"""
 
 
@@ -294,7 +298,7 @@ The basic slice syntax is i:j:k where i is the starting index, j is the stopping
 
 ---
 
-    $ python3 A1Part3.py 
+    $ python3 A1-Part-3.py 
     [0 2 4 6 8]
 
 
@@ -419,7 +423,15 @@ When you feed a native python list like [1,2,3] to a numpy method that expects a
 
 ---
 
-### Signals
+## A2: Sinusoids and DFT
+
+---
+
+### A2_Part-1: Generate a sinusoid
+---
+
+
+#### Signals
 
 * Continnous time signal (analog signal)
 * Discrete time signal   (digital signal)
@@ -427,8 +439,25 @@ When you feed a native python list like [1,2,3] to a numpy method that expects a
 
 ![signals-continnous-discrete.png](img/signals-continnous-discrete.png)
 
+![flipping-scaling.png](img/flipping-scaling.png)
 
+---
 
+### A2_Part-2: Generate a complex sinusoid
+
+---
+
+### A2_Part-3: Implement the discrete Fourier transform
+(DFT)
+
+---
+
+### A2_Part-4: Implement the inverse discrete Fourier
+transform (IDFT)
+
+---
+
+### A2_Part-5: Compute the magnitude spectrum
 
 ---
 
