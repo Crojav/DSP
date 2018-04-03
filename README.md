@@ -441,19 +441,23 @@ When you feed a native python list like [1,2,3] to a numpy method that expects a
 
 ![flipping-scaling.png](img/flipping-scaling.png)
 
+
+![shifting.png](img/shifting.png) 
+
+
+[DSP Lecture 1: Signals](https://www.youtube.com/watch?v=hVOA8VtKLgk)
+
 ---
 
 ### A2_Part-2: Generate a complex sinusoid
 
 ---
 
-### A2_Part-3: Implement the discrete Fourier transform
-(DFT)
+### A2_Part-3: Implement the discrete Fourier transform(DFT)
 
 ---
 
-### A2_Part-4: Implement the inverse discrete Fourier
-transform (IDFT)
+### A2_Part-4: Implement the inverse discrete Fourier transform (IDFT)
 
 ---
 
