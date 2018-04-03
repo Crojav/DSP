@@ -19,5 +19,5 @@ def downsampleAudio(inputFile,M):
     UF.wavwrite(x_array_slice, fs, name_and_path )
 
 
-print(downsampleAudio('../../sounds/vibraphone-C6.wav', 16))
+downsampleAudio('../../sounds/vibraphone-C6.wav', 16)
 
