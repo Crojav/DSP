@@ -420,11 +420,48 @@ nal when downsampling it? You can find some related information in https:
 [https://ccrma.stanford.edu/~cfoster0/220a/fp/convertfiles.py](https://ccrma.stanford.edu/~cfoster0/220a/fp/convertfiles.py)
 
 ---
+
+#### TypeError: only length-1 arrays can be converted to Python scalars
+
+    (fs, x) = UF.wavread(inputFile)
+    x_array = np.array(x)
+    print(a_array)
+
+    # TypeError: only length-1 arrays can be converted to Python scalars
+    """ When you feed a native python list like [1,2,3] to a numpy method that expects a numpy array, you will get this error. That numpy method takes your native python list, and tries to digest it, and way deep down it pukes up this response. A more user friendly error message would have been: TypeError: Don't feed native python lists into numpy functions that expect numpy arrays. Either convert your python list to a numpy array or package your python lists into a tuple. Python numpy really dropped the ball on that one, that error message is terrible."""
+
+[https://stackoverflow.com/questions/21687581/typeerror-only-length-1-arrays-can-be-converted-to-python-scalars-while-trying](https://stackoverflow.com/questions/21687581/typeerror-only-length-1-arrays-can-be-converted-to-python-scalars-while-trying)
+	
+
+    (fs, x) = UF.wavread(inputFile)
+    x.astype(int)
+    x_array = np.array(x)
+    print(a_array)
+
+
+
+---
     # A1-Part-4.py
 
+    import sys, os
+    import numpy as np
+    import utilFunctions as UF
 
 
+    def downsampleAudio(inputFile,M):
+       (fs, x) = UF.wavread(inputFile)
+       x.astype(int)
+       x_array = np.array(x)
+       x_array_slice = x_array[::M] # equivalent to: x_array_slice[0:x_array.size:M]
 
+       outputFile_name =   'downsampled_' + inputFile[13:]
+       outputFile_path = '../../sounds/output_sounds/'
+       name_and_path = outputFile_path + outputFile_name
+
+       UF.wavwrite(x_array_slice, fs, name_and_path )
+
+
+    print(downsampleAudio('../../sounds/vibraphone-C6.wav', 16))
 
 
 ---

@@ -26,7 +26,7 @@ def downsampleAudio(inputFile,M):
     Downsampled_16 = a_array[::16]
 
 
-    outputFileDownsampled =  '../../sounds/output_sounds/' 'downsampled_' + os.path.basename(inputFile)[:-4] + '.wav'
+    outputFileDownsampled =  '/sounds/output_sounds/' 'downsampled_' + os.path.basename(inputFile)[:-4] + '.wav'
 
     UF.wavwrite(outputFileDownsampled, 144000, Downsampled_16 )
 
