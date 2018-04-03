@@ -380,7 +380,7 @@ When you feed a native python list like [1,2,3] to a numpy method that expects a
     (fs, x) = UF.wavread(inputFile)
     x.astype(int)
     x_array = np.array(x)
-    print(a_array)
+    print(x_array)
 
 
 
@@ -409,12 +409,32 @@ When you feed a native python list like [1,2,3] to a numpy method that expects a
     downsampleAudio('../../sounds/vibraphone-C6.wav', 16)
 
 
+
+
+
+
 ---
 
 <br>
 
 ---
 
+### Signals
+
+* Continnous time signal (analog signal)
+* Discrete time signal   (digital signal)
+
+
+![signals-continnous-discrete.png](img/signals-continnous-discrete.png)
+
+
+
+
+---
+
+<br>
+
+---
 
 
 
@@ -430,3 +450,17 @@ When you feed a native python list like [1,2,3] to a numpy method that expects a
 
 
 [https://processing.org/tutorials/arrays/](https://processing.org/tutorials/arrays/)
+
+
+
+[DSP Lecture 1: Signals](https://www.youtube.com/watch?v=hVOA8VtKLgk)
+
+[DSP Lecture 2: Linear, time-invariant systems](https://www.youtube.com/watch?v=yIYcT7U2OaA)
+
+[DSP Lecture 3: Convolution and its properties](https://www.youtube.com/watch?v=kVSUnbgul7g)
+
+[DSP Lecture 4: The Fourier Series](https://www.youtube.com/watch?v=0J4IAEUW5pA)
+
+[DSP Lecture 5: the Fourier Transform](https://www.youtube.com/watch?v=5HSn3DPHQcQ)
+
+[DSP Lecture 6: Frequency Response](https://www.youtube.com/watch?v=QqDbYI4YcfM)
