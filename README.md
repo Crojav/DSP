@@ -428,8 +428,75 @@ When you feed a native python list like [1,2,3] to a numpy method that expects a
 ---
 
 ### A2_Part-1: Generate a sinusoid
+
+Complete the function genSine(A, f, phi, fs, t) in the file A2Part1.py to
+generate a real sinusoid (use np.cos()) given its amplitude A, frequency f (Hz),
+initial phase phi (radians), sampling rate fs (Hz) and duration t (seconds).
+
+All the input arguments to this function (A, f, phi, fs and t) are real numbers
+such that A, t and fs are positive, and fs > 2*f to avoid aliasing. The function
+should return a numpy array x of the sinusoid generated using Equation 1.
+if you run your code using A=1.0, f = 10.0, phi = 1.0, fs = 50.0 and t =
+0.1, the output x should be the following numpy array: array([ 0.54030231,
+-0.63332387, -0.93171798, 0.05749049, 0.96724906])
+
+
+    def genSine(A, f, phi, fs, t):
+    """
+    Inputs:
+    A (float) = amplitude of the sinusoid
+    f (float) = frequency of the sinusoid in Hz
+    phi (float) = initial phase of the sinusoid in radians
+    fs (float) = sampling frequency of the sinusoid in Hz
+    t (float) = duration of the sinusoid (is second)
+    Output:
+    The function should return a numpy array
+    x (numpy array) = The generated sinusoid (use np.cos())
+    """
+    ## Your code here
+
+
 ---
 
+#### Sinus, cosinus en tangens
+
+[http://wm.math4allview.appspot.com/view?comp=lj3-h-h24&subcomp=lj3-h-h24-04&variant=basis_wm](http://wm.math4allview.appspot.com/view?comp=lj3-h-h24&subcomp=lj3-h-h24-04&variant=basis_wm)
+
+---
+
+    Code #1 : Working
+    # Python program explaining
+    # cos() function
+     
+    import numpy as np
+    import math
+     
+    in_array = [0, math.pi / 2, np.pi / 3, np.pi]
+    print ("Input array : \n", in_array)
+     
+    cos_Values = np.cos(in_array)
+    print ("\nCosine values : \n", cos_Values)
+
+
+[https://www.geeksforgeeks.org/numpy-cos-python/](https://www.geeksforgeeks.org/numpy-cos-python/)
+
+---
+
+#### Making Sinusoids with Python
+
+[http://www.mrcolson.com/2015/12/24/Making-Sinusoids-with-Python.html](http://www.mrcolson.com/2015/12/24/Making-Sinusoids-with-Python.html)
+
+---
+    # A2_Part-1.py
+
+
+
+
+
+
+
+
+---
 
 #### Signals
 
