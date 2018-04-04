@@ -497,3 +497,29 @@ When you feed a native python list like [1,2,3] to a numpy method that expects a
 [DSP Lecture 5: the Fourier Transform](https://www.youtube.com/watch?v=5HSn3DPHQcQ)
 
 [DSP Lecture 6: Frequency Response](https://www.youtube.com/watch?v=QqDbYI4YcfM)
+
+
+
+---
+
+<br>
+
+---
+
+### Github
+
+    git init
+    git add .
+    git commit -m "25 commit"
+    git remote add origin https://github.com/Crojav/DSP.git
+    git push origin master
+
+    git config --global credential.helper cache
+    # Set git to use the credential memory cache
+
+    # To change the default password cache timeout, enter the following:
+
+    git config --global credential.helper 'cache --timeout=3600'
+    # Set the cache to timeout after 1 hour (setting is in seconds)
+
+
