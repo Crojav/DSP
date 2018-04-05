@@ -2,6 +2,12 @@
 
 DSP stand for Digital Signal Processing in Python 
 
+I’ve been spending a fair amount of time lately learning Python, but most of my efforts have been focused on the turtle graphics module. It’s a lot of fun, and some of the images I’ve been able to come up with are quite interesting (to me, at least), but what I really want to do is learn how to do things with audio. So I’ve started studying DSP. I’m pretty confortable with continuous functions, but discrete functions can be a bit of a challenge at first - indexes, the meaning of frequency and time, etc. With a little practice - which is all this post is - it becomes clear pretty quickly. Along the way, I get some practice plotting with Matplotlib, Numpy and Scipy. First order of business, I want to understand sinusoid generation. The basic equation is:
+
+[http://www.mrcolson.com/2015/12/24/Making-Sinusoids-with-Python.html](http://www.mrcolson.com/2015/12/24/Making-Sinusoids-with-Python.html)
+
+
+
 ### Digital representation of sound
 
 Analog digital converter (ADC) receives the discrete voltages from the sample and hold device, and ascribes a numerical value to each amplitude. This process of converting voltages to numbers is known as quantization. Those numbers are expressed in the computer as a string of binary digits (1 or 0). To play the sound back, we read the numbers from memory, and deliver those numbers to a digital-to-analog converter (DAC) at the same rate at which they were recorded. The DAC converts each number to a voltage, and communicates those voltages to an amplifier to increase the amplitude of the voltage.
@@ -489,9 +495,18 @@ if you run your code using A=1.0, f = 10.0, phi = 1.0, fs = 50.0 and t =
 ---
     # A2_Part-1.py
 
-
-
-
+>>> A = 1.0
+>>> f= 10.0
+>>> fs = 50.0
+>>> phi = 1.0
+>>> T = 0.1/fs
+>>> samples = 1
+>>> n = np.arange(samples)
+>>> y = A*np.cos(2*np.pi*f*n*T + phi)
+>>> y_slice = y[:45:10]
+>>> y_slice
+array([ 0.54030231, -0.63332387, -0.93171798,  0.05749049,  0.96724906])
+>>> 
 
 
 
