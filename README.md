@@ -514,6 +514,26 @@ if you run your code using A=1.0, f = 10.0, phi = 1.0, fs = 50.0 and t =
         
     genCos(A, f, phi, fs, t)
 
+---
+
+
+![ATupleOfData.png](img/ATupleOfData.png)
+
+![bunchOfBites.png](img/bunchOfBites.png)
+
+![pitchDetection.png](img/pitchDetection.png)
+
+![pitchTermology.png](img/pitchTermology.png)
+
+
+[https://github.com/Virtualan/musical-note-trainer](https://github.com/Virtualan/musical-note-trainer)
+
+[https://github.com/markjay4k/Audio-Spectrum-Analyzer-in-Python](https://github.com/markjay4k/Audio-Spectrum-Analyzer-in-Python)
+
+[https://www.youtube.com/watch?v=AShHJdSIxkY](https://www.youtube.com/watch?v=AShHJdSIxkY)
+[https://www.youtube.com/watch?v=aQKX3mrDFoY](https://www.youtube.com/watch?v=aQKX3mrDFoY)
+[https://www.youtube.com/watch?v=RHmTgapLu4s](https://www.youtube.com/watch?v=RHmTgapLu4s)
+[https://www.youtube.com/watch?v=ns_T2wjGNtA](https://www.youtube.com/watch?v=ns_T2wjGNtA)
 
 
 ---
@@ -557,6 +577,166 @@ if you run your code using A=1.0, f = 10.0, phi = 1.0, fs = 50.0 and t =
 ---
 
 
+Since a wav file basically is raw audio data, you won't be able to change the pitch without "raw audio processing".
+
+Here is what you could do. You will need the wave (standard library) and numpy modules.
+
+
+    import wave
+    import numpy as np
+
+    Open the files.
+
+    wr = wave.open('input.wav', 'r')
+    # Set the parameters for the output file.
+    par = list(wr.getparams())
+    par[3] = 0  # The number of samples will be set by writeframes.
+    par = tuple(par)
+    ww = wave.open('pitch1.wav', 'w')
+    ww.setparams(par)
+
+The sound should be processed in small fractions of a second. This cuts down on reverb. Try setting fr to 1; you'll hear annoying echos.
+
+    fr = 20
+    sz = wr.getframerate()//fr  # Read and process 1/fr second at a time.
+    # A larger number for fr means less reverb.
+    c = int(wr.getnframes()/sz)  # count of the whole file
+    shift = 100//fr  # shifting 100 Hz
+    for num in range(c):
+
+Read the data, split it in left and right channel (assuming a stereo WAV file).
+
+    da = np.fromstring(wr.readframes(sz), dtype=np.int16)
+    left, right = da[0::2], da[1::2]  # left and right channel
+
+Extract the frequencies using the Fast Fourier Transform built into numpy.
+
+    lf, rf = np.fft.rfft(left), np.fft.rfft(right)
+
+Roll the array to increase the pitch.
+
+    lf, rf = np.roll(lf, shift), np.roll(rf, shift)
+
+The highest frequencies roll over to the lowest ones. That's not what we want, so zero them.
+
+    lf[0:shift], rf[0:shift] = 0, 0
+
+Now use the inverse Fourier transform to convert the signal back into amplitude.
+
+    nl, nr = np.fft.irfft(lf), np.fft.irfft(rf)
+
+Combine the two channels.
+
+    ns = np.column_stack((nl, nr)).ravel().astype(np.int16)
+
+Write the output data.
+
+    ww.writeframes(ns.tostring())
+
+Close the files when all frames are processed.
+
+    wr.close()
+    ww.close()
+
+
+
+
+---
+
+
+
+You can try pydub for quick and easy pitch change across entire audio file and for different formats (wav, mp3 etc).
+
+Here is a working code. Inspiration from here and refer here for more details on pitch change.
+
+    from pydub import AudioSegment
+    from pydub.playback import play
+
+    sound = AudioSegment.from_file('in.wav', format="wav")
+
+    # shift the pitch up by half an octave (speed will increase proportionally)
+    octaves = 0.5
+
+    new_sample_rate = int(sound.frame_rate * (2.0 ** octaves))
+
+    # keep the same samples but tell the computer they ought to be played at the 
+    # new, higher sample rate. This file sounds like a chipmunk but has a weird sample rate.
+    hipitch_sound = sound._spawn(sound.raw_data, overrides={'frame_rate': new_sample_rate})
+
+    # now we just convert it to a common sample rate (44.1k - standard audio CD) to 
+    # make sure it works in regular audio players. Other than potentially losing audio quality (if
+    # you set it too low - 44.1k is plenty) this should now noticeable change how the audio sounds.
+    hipitch_sound = hipitch_sound.set_frame_rate(44100)
+
+    #Play pitch changed sound
+    play(hipitch_sound)
+
+    #export / save pitch changed sound
+    hipitch_sound.export("out.wav", format="wav")
+
+[https://github.com/jiaaro/pydub/blob/master/API.markdown](https://github.com/jiaaro/pydub/blob/master/API.markdown)
+
+[https://github.com/jiaaro/pydub/issues/157](https://github.com/jiaaro/pydub/issues/157)
+
+[https://github.com/jiaaro/pydub/issues/157](https://github.com/jiaaro/pydub/issues/157)
+
+
+---
+
+
+
+
+My dear, you are in big trouble (I've been there).
+
+First of all, I think all wav files use floats, that don't exceed a certain threshold, say the values are between -1 and 1. So, when you add "just +2" to your file, you're in fact saturating everything.
+
+Then, there is something you got wrong about the music theory. You may know that sound is a wave. More precisely, when you record a 440Hz note (the A4 note that musicians use to tune their instruments), what you get is a sine wave (like this one) oscillating 440 times per second. What's more, it can be centered around 0 or not, but the sound won't be any different (which means adding or removing a constant to the wave is pointless; the only thing you might do is saturate the signal).
+
+So, to change the pitch of a sound, you have to modify its frequency: the number of times it oscillates per second. In music, this is called a vocoder. The theory behind it is quite hardcore already; it's from a science field called signal processing. More precisely, a (phase) vocoder uses:
+
+Fourier Transforms (this tutorial seems quite cool, otherwise Wikipedia, but it's math-oriented). Given a sample of sound, the Fourier transform gives the frequencies that it contains (a little bit of A4, a lot of C3, etc.). (More precisely, you need a Short Time Fourier Transform for this particular problem);
+The overlap-add algorithm, that is used to make Fourier transforms on chunks of your file, modify the pitch on each chunk, and paste all the chunks back together. This is where I totally failed (and I've been trying to code a vocoder twice).
+
+I could go on longer, but I guess you got the point: anything that touches sound frequency (like the pitch) is filled with heavy math. Signal processing is a very interesting field, but it's quite hard to dive into it. If you have good enough math skills, you can have a look at some courses online, here Stanford's. If you just want to play around with music and code, use existing tools, not raw data (I think of Processing, or existing python libraries).
+
+If you want an easier exercise to do stuff with wav files, try modifying the volume or the speed (be aware it will modify the pitch, though). For the volume, you will have to multiply (not add) a constant to every sample of the file. For the speed, you can remove one sample out of two to make the audio twice faster, or increase the size of your wave array, and find a good solution to put a relevant sample between each existing one (zero? the previous sample? Try out stuff!).
+
+Good luck!
+
+
+[https://stackoverflow.com/questions/40979925/how-would-i-pitch-a-wav-file-using-python](https://stackoverflow.com/questions/40979925/how-would-i-pitch-a-wav-file-using-python)
+
+
+
+
+
+
+
+
+
+
+
+[https://stackoverflow.com/questions/43963982/python-change-pitch-of-wav-file](https://stackoverflow.com/questions/43963982/python-change-pitch-of-wav-file)
+
+
+
+
+
+
+
+
+---
+
+<br>
+
+---
+
+
+
+
+
+
+
 
 ### Links
 
@@ -572,6 +752,8 @@ if you run your code using A=1.0, f = 10.0, phi = 1.0, fs = 50.0 and t =
 [https://processing.org/tutorials/arrays/](https://processing.org/tutorials/arrays/)
 
 
+[https://github.com/jrising/pysoundtouch](https://github.com/jrising/pysoundtouch)
+
 
 [DSP Lecture 1: Signals](https://www.youtube.com/watch?v=hVOA8VtKLgk)
 
@@ -586,6 +768,10 @@ if you run your code using A=1.0, f = 10.0, phi = 1.0, fs = 50.0 and t =
 [DSP Lecture 6: Frequency Response](https://www.youtube.com/watch?v=QqDbYI4YcfM)
 
 
+
+[AudioSignalProcessingforMusicApplicationsCoursera.html](AudioSignalProcessingforMusicApplicationsCoursera.html)
+
+[ABinaryNumbersTutorialWith1And0 .html](ABinaryNumbersTutorialWith1And0 .html)
 
 ---
 
@@ -610,3 +796,16 @@ if you run your code using A=1.0, f = 10.0, phi = 1.0, fs = 50.0 and t =
     # Set the cache to timeout after 1 hour (setting is in seconds)
 
 
+
+
+
+
+
+
+
+
+
+- [Installing Pydub](https://github.com/jiaaro/pydub#installation)
+
+
+## Installation
